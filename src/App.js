@@ -9,6 +9,10 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(5);
 
+    const [pageNumberLimit, setPageNumberLimit] = useState(5);
+    const [maxPageNumerLimit, setmaxPageNumerLimit] = useState(5);
+    const [minPageNumerLimit, setminPageNumberLimit] = useState(0);
+
     useEffect(() => {
         const fetchPosts = async () => {
             setLoading(true);
@@ -32,6 +36,25 @@ function App() {
         setCurrentPage(pageNumber);
     };
 
+    //handle next and prev buttons
+    const nextPageNumber = (e) => {
+        setCurrentPage(currentPage + 1);
+        if (currentPage + 1 > maxPageNumerLimit) {
+            setmaxPageNumerLimit(maxPageNumerLimit + pageNumberLimit);
+            setminPageNumberLimit(minPageNumerLimit + pageNumberLimit);
+        }
+        e.preventDefault();
+    };
+
+    const handlePrevBtn = (e) => {
+        setCurrentPage(currentPage - 1);
+        if ((currentPage - 1) % pageNumberLimit == 0) {
+            setmaxPageNumerLimit(maxPageNumerLimit - pageNumberLimit);
+            setminPageNumberLimit(minPageNumerLimit - pageNumberLimit);
+        }
+        e.preventDefault();
+    };
+
     return (
         <>
             <div className="container mt-5">
@@ -42,6 +65,11 @@ function App() {
                     totalPosts={posts.length}
                     paginate={paginate}
                     currentPage={currentPage}
+                    pageNumberLimit={pageNumberLimit}
+                    maxPageNumerLimit={maxPageNumerLimit}
+                    minPageNumerLimit={minPageNumerLimit}
+                    nextPageNumber={nextPageNumber}
+                    handlePrevBtn={handlePrevBtn}
                 />
             </div>
         </>

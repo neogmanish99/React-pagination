@@ -1,0 +1,13 @@
+.active {
+    border: 0.1px solid rgb(70, 70, 70);
+}
+
+.butts {
+    border: none;
+    margin: 0 2px 0 2px;
+}
+
+.butts:hover {
+    background-color: rgb(57, 57, 57);
+    color: rgb(238, 238, 238);
+}
